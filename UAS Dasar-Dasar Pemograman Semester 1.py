@@ -1,5 +1,7 @@
 from datetime import datetime
+from prettytable import PrettyTable
 from colorama import Fore,Style
+import pwinput
 import csv
 
 kesempatan = 3
@@ -48,6 +50,7 @@ def menu_voucher():
     jam = waktu_sekarang.hour
 
     masukkan_voucher = input("Silahkan Masukkan Voucher Anda! : ")
+    
     if masukkan_voucher == "PAGI123" and penggunaan_vouucher > 0 and 5 <= jam < 10:
         penggunaan_vouucher -= 1
         diskon = 2
@@ -125,18 +128,22 @@ def menu_beli_makan():
     waktu_sekarang = datetime.now()
     jam = waktu_sekarang.hour
 
-    if 8 <= jam < 10:
-        pagi = "Pagi"  
+    if 0 <= jam < 10:
+        pagi = "Pagi"
+        menu_pagi = [("1","Bubur Ayam",bubur),("2","Nasi Kuning",nasi_kuning)]
         print(Fore.BLUE + f"\nMenu untuk {pagi} ini 🍀")
         print (f"Gems Anda Sekarang adalah {gems}" + Style.RESET_ALL)
-        print(f"\n[1] Bubur Ayam, {bubur} Gems")
-        print(f"[2] Nasi Kuning, {nasi_kuning} Gems")
-        print("[3] Keluar")
+
+        tabel_pagi = PrettyTable()
+        tabel_pagi.field_names = ["No","Makanan","Harga"]
+        for makanan in menu_pagi:
+            tabel_pagi.add_row(makanan)
+        tabel_pagi.add_row(["3", "Keluar", "-"])
+        print(tabel_pagi)
         try:
-            pilihan = int(input("Silahkan Pilih (1/2/3) : "))
+            pilihan = int(input("\nSilahkan Pilih (1/2/3) : "))
         except ValueError:
             print(Fore.RED + "Pilihan Tidak Ada!" + Style.RESET_ALL)
-
         if pilihan == 1 and gems >= 4:
             gems -= bubur
             print(Fore.GREEN + "\nSelamat Anda Telah Membeli Bubur!" + Style.RESET_ALL)
@@ -154,16 +161,20 @@ def menu_beli_makan():
 
     elif 10 <= jam < 18:
         siang= "Siang"
+        menu_siang = [("1","Pempek",pempek),("2","Siomay",siomay)]
         print(Fore.BLUE + f"\nMenu untuk {siang} ini ☀️")
         print (f"Gems Anda Sekarang adalah {gems}" + Style.RESET_ALL)
-        print(f"\n[1] Pempek, {pempek} Gems")
-        print(f"[2] Siomay, {siomay} Gems")
-        print("[3] Keluar")
+
+        tabel_siang = PrettyTable()
+        tabel_siang.field_names = ["No","Makanan","Harga"]
+        for makanan in menu_siang:
+            tabel_siang.add_row(makanan)
+        tabel_pagi.add_row(["3", "Keluar", "-"])
+        print(tabel_siang)
         try:
-            pilihan = int(input("Silahkan Pilih (1/2/3) : "))
+            pilihan = int(input("\nSilahkan Pilih (1/2/3) : "))
         except ValueError:
             print(Fore.RED + "Pilihan Tidak Ada!" + Style.RESET_ALL)
-
         if pilihan == 1 and gems >= 7:
             gems -= pempek
             print(Fore.GREEN + "\nSelamat Anda Telah Membeli Pempek!" + Style.RESET_ALL)
@@ -181,16 +192,20 @@ def menu_beli_makan():
 
     elif 18 <= jam < 20:
         malam= "Malam"
+        menu_malam = [("1","Martabak",martabak),("2","Terang Bulan",terang_bulan)]
         print(Fore.BLUE + f"\nMenu untuk {malam} ini 🌙")
         print (f"Gems Anda Sekarang adalah {gems}" + Style.RESET_ALL)
-        print(f"\n[1] Martabak, {martabak} Gems")
-        print(f"[2] Terang Bulan, {terang_bulan} Gems")
-        print("[3] Keluar")
+
+        tabel_malam = PrettyTable()
+        tabel_malam.field_names = ["No","Makanan","Harga"]
+        for makanan in menu_malam:
+            tabel_malam.add_row(makanan)
+        tabel_pagi.add_row(["3", "Keluar", "-"])
+        print(tabel_malam)
         try:
-            pilihan = int(input("Silahkan Pilih (1/2/3) : "))
+            pilihan = int(input("\nSilahkan Pilih (1/2/3) : "))
         except ValueError:
             print(Fore.RED + "Pilihan Tidak Ada!" + Style.RESET_ALL)
-
         if pilihan == 1 and gems >= 5:
             gems -= martabak
             print(Fore.GREEN + "\nSelamat Anda Telah Membeli Martabak!" + Style.RESET_ALL)
@@ -215,13 +230,17 @@ def menu_beli_makan_vip():
     global gems
 
     if 8 <= jam < 10:
-        pagi = "Pagi"  
+        pagi = "Pagi"
+        menu_pagi = [("1","Bubur Ayam",bubur),("2","Nasi Kuning",nasi_kuning),("3","Soto",soto)]
         print(Fore.BLUE + f"\nMenu untuk {pagi} ini 🍀")
         print (f"Gems Anda Sekarang adalah {gems}" + Style.RESET_ALL)
-        print(f"\n[1] Bubur Ayam, {bubur} Gems")
-        print(f"[2] Nasi Kuning, {nasi_kuning} Gems")
-        print(f"[3] Soto, {soto} Gems")
-        print("[4] Keluar")
+
+        tabel_pagi = PrettyTable()
+        tabel_pagi.field_names = ["No","Makanan","Harga"]
+        for makanan in menu_pagi:
+            tabel_pagi.add_row(makanan)
+        tabel_pagi.add_row(["4", "Keluar", "-"])
+        print(tabel_pagi)
         try:
             pilihan = int(input("Silahkan Pilih (1/2/3/4) : "))
         except ValueError:
@@ -247,13 +266,17 @@ def menu_beli_makan_vip():
             menu_beli_makan_vip()
 
     elif 10 <= jam < 18:
-        siang= "Siang"   
+        siang= "Siang"
+        menu_siang = [("1","Pempek",pempek),("2","Siomay",siomay),("4","Batagor",batagor)]
         print(Fore.BLUE + f"\nMenu untuk {siang} ini ☀️")
         print (f"Gems Anda Sekarang adalah {gems}" + Style.RESET_ALL)
-        print(f"\n[1] Pempek, {pempek} Gems")
-        print(f"[2] Siomay, {siomay} Gems")
-        print(f"[3] Batagor, {batagor} Gems")
-        print("[4] Keluar")
+
+        tabel_siang = PrettyTable()
+        tabel_siang.field_names = ["No","Makanan","Harga"]
+        for makanan in menu_siang:
+            tabel_siang.add_row(makanan)
+        tabel_pagi.add_row(["4", "Keluar", "-"])
+        print(tabel_siang)
         try:
             pilihan = int(input("Silahkan Pilih (1/2/3/4) : "))
         except ValueError:
@@ -280,12 +303,16 @@ def menu_beli_makan_vip():
 
     elif 18 <= jam < 20:
         malam= "Malam"
+        menu_malam = [("1","Martabak",martabak),("2","Terang Bulan",terang_bulan),("3","Pisang Bakar",pisang_bakar)]
         print(Fore.BLUE + f"\nMenu untuk {malam} ini 🌙")
         print (f"Gems Anda Sekarang adalah {gems}" + Style.RESET_ALL)
-        print(f"\n[1] Martabak, {martabak} Gems")
-        print(f"[2] Terang Bulan, {terang_bulan} Gems")
-        print(f"[3] Pisang Bakar, {pisang_bakar} Gems")
-        print("[4] Keluar")
+
+        tabel_malam = PrettyTable()
+        tabel_malam.field_names = ["No","Makanan","Harga"]
+        for makanan in menu_malam:
+            tabel_malam.add_row(makanan)
+        tabel_pagi.add_row(["4", "Keluar", "-"])
+        print(tabel_malam)
         try:
             pilihan = int(input("Silahkan Pilih (1/2/3/4) : "))
         except ValueError:
@@ -359,7 +386,7 @@ def menu_login_user():
     while kesempatan > 0:
         global username
         username = input("\nSilahkan Masukkan Username Anda! : ")
-        password = input("Silahkan Masukkan Password Anda! : ")
+        password = pwinput.pwinput(prompt = "Silahkan Masukkan Password Anda! : ")
 
         found = False
 
@@ -384,7 +411,7 @@ def menu_login_VIP():
     while kesempatan > 0:
         global username_vip
         username_vip = input("\nSilahkan Masukkan Username Anda! : ")
-        password_vip = input("Silahkan Masukkan Password Anda! : ")
+        password_vip = pwinput.pwinput(prompt="Silahkan Masukkan Password Anda! : ")
 
         found = False
 
