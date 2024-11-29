@@ -1,7 +1,7 @@
 # Ujian Akhir Semester Dasar-Dasar Pemograman Semester 1
 
 <p> Selamat datang di proyek Toko Makanan Dengan Waktu! 🎉 <br>
-Ini adalah sebuah aplikasi sederhana yang memungkinkan pengguna untuk membeli makanan dengan menggunakan sistem gems dan voucher diskon.  Aplikasi ini dirancang untuk memberikan pengalaman berbelanja yang menyenangkan, tergantung pada waktu.
+Ini adalah sebuah aplikasi sederhana yang memungkinkan pengguna untuk membeli makanan dengan menggunakan sistem gems dan voucher diskon.  Aplikasi ini dirancang untuk memberikan pengalaman berbelanja yang menyenangkan, tergantung pada waktu. Berikut Video penjelasan outputnys : 
 
 # Fitur-Fitur 🕹️
 #### 1. Sistem Gems
