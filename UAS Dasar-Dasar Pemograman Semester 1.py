@@ -51,12 +51,12 @@ def menu_voucher():
 
     masukkan_voucher = input("Silahkan Masukkan Voucher Anda! : ")
     
-    if masukkan_voucher == "PAGI123" and penggunaan_vouucher > 0 and 5 <= jam < 10:
+    if masukkan_voucher == "PAGI123" and penggunaan_vouucher > 0 and 8 <= jam < 10:
         penggunaan_vouucher -= 1
         diskon = 2
         bubur -= diskon
         nasi_kuning -= diskon
-        print(f"Selamat Voucher {masukkan_voucher} Berhasil Digunakan!")
+        print(Fore.GREEN + f"\nSelamat Voucher {masukkan_voucher} Berhasil Digunakan!" + Style.RESET_ALL)
         menu_user()
     
     elif masukkan_voucher == "SIANG23" and penggunaan_vouucher > 0 and 10 <= jam < 18:
@@ -64,7 +64,7 @@ def menu_voucher():
         diskon = 3
         pempek -= diskon
         siomay -= diskon
-        print(f"Selamat Voucher {masukkan_voucher} Berhasil Digunakan!")
+        print(Fore.GREEN + f"\nSelamat Voucher {masukkan_voucher} Berhasil Digunakan!" + Style.RESET_ALL)
         menu_user()
 
     elif masukkan_voucher == "MALAM14" and penggunaan_vouucher > 0  and 18 <= jam < 20:
@@ -72,7 +72,7 @@ def menu_voucher():
         diskon = 4
         martabak -= diskon
         terang_bulan -= diskon
-        print(f"Selamat Voucher {masukkan_voucher} Berhasil Digunakan!")
+        print(Fore.GREEN + f"\nSelamat Voucher {masukkan_voucher} Berhasil Digunakan!" + Style.RESET_ALL)
         menu_user()
 
     else:
@@ -80,7 +80,7 @@ def menu_voucher():
             print(Fore.RED + "\nVoucher Telah Digunakan!" + Style.RESET_ALL)
             menu_user()
 
-        print(Fore.RED + "Mohon Maaf Kode Voucher Tidak Dapat Digunakan!" + Style.RESET_ALL)
+        print(Fore.RED + "\nMohon Maaf Kode Voucher Tidak Dapat Digunakan!" + Style.RESET_ALL)
         menu_user()
 
 def menu_isi_gems():
@@ -128,7 +128,7 @@ def menu_beli_makan():
     waktu_sekarang = datetime.now()
     jam = waktu_sekarang.hour
 
-    if 0 <= jam < 10:
+    if 8 <= jam < 10:
         pagi = "Pagi"
         menu_pagi = [("1","Bubur Ayam",bubur),("2","Nasi Kuning",nasi_kuning)]
         print(Fore.BLUE + f"\nMenu untuk {pagi} ini 🍀")
