@@ -29,7 +29,7 @@ batagor = 3
 # menu malam
 martabak = 5
 terang_bulan = 5
-pisang_bakar = 4
+pisang_bakar = 8
 
 def waktu():
     waktu_sekarang = datetime.now()
@@ -43,8 +43,48 @@ def waktu():
         salam = "Selamat Malam"
     return salam
 
-def menu_voucher():
+def menu_voucher_vip():
     global gems, diskon, bubur, nasi_kuning, pempek ,siomay, martabak, terang_bulan, penggunaan_vouucher
+    diskon = 0
+    waktu_sekarang = datetime.now()
+    jam = waktu_sekarang.hour
+
+    masukkan_voucher = input("Silahkan Masukkan Voucher Anda! : ")
+    
+    if masukkan_voucher == "PAGI123" and penggunaan_vouucher > 0 and 8 <= jam < 10:
+        penggunaan_vouucher -= 1
+        diskon = 2
+        bubur -= diskon
+        nasi_kuning -= diskon
+        print(Fore.GREEN + f"\nSelamat Voucher {masukkan_voucher} Berhasil Digunakan!" + Style.RESET_ALL)
+        menu_VIP()
+    
+    elif masukkan_voucher == "SIANG23" and penggunaan_vouucher > 0 and 10 <= jam < 18:
+        penggunaan_vouucher -= 1
+        diskon = 3
+        pempek -= diskon
+        siomay -= diskon
+        print(Fore.GREEN + f"\nSelamat Voucher {masukkan_voucher} Berhasil Digunakan!" + Style.RESET_ALL)
+        menu_VIP()
+
+    elif masukkan_voucher == "MALAM14" and penggunaan_vouucher > 0  and 18 <= jam < 20:
+        penggunaan_vouucher -= 1
+        diskon = 4
+        martabak -= diskon
+        terang_bulan -= diskon
+        print(Fore.GREEN + f"\nSelamat Voucher {masukkan_voucher} Berhasil Digunakan!" + Style.RESET_ALL)
+        menu_VIP()
+
+    else:
+        if penggunaan_vouucher == 0:
+            print(Fore.RED + "\nVoucher Telah Digunakan!" + Style.RESET_ALL)
+            menu_VIP()
+
+        print(Fore.RED + "\nMohon Maaf Kode Voucher Tidak Dapat Digunakan!" + Style.RESET_ALL)
+        menu_VIP()
+
+def menu_voucher():
+    global gems, bubur, nasi_kuning, pempek ,siomay, martabak, terang_bulan, penggunaan_vouucher
     diskon = 0
     waktu_sekarang = datetime.now()
     jam = waktu_sekarang.hour
@@ -169,7 +209,7 @@ def menu_beli_makan():
         tabel_siang.field_names = ["No","Makanan","Harga"]
         for makanan in menu_siang:
             tabel_siang.add_row(makanan)
-        tabel_pagi.add_row(["3", "Keluar", "-"])
+        tabel_siang.add_row(["3", "Keluar", "-"])
         print(tabel_siang)
         try:
             pilihan = int(input("\nSilahkan Pilih (1/2/3) : "))
@@ -200,7 +240,7 @@ def menu_beli_makan():
         tabel_malam.field_names = ["No","Makanan","Harga"]
         for makanan in menu_malam:
             tabel_malam.add_row(makanan)
-        tabel_pagi.add_row(["3", "Keluar", "-"])
+        tabel_malam.add_row(["3", "Keluar", "-"])
         print(tabel_malam)
         try:
             pilihan = int(input("\nSilahkan Pilih (1/2/3) : "))
@@ -275,7 +315,7 @@ def menu_beli_makan_vip():
         tabel_siang.field_names = ["No","Makanan","Harga"]
         for makanan in menu_siang:
             tabel_siang.add_row(makanan)
-        tabel_pagi.add_row(["4", "Keluar", "-"])
+        tabel_siang.add_row(["4", "Keluar", "-"])
         print(tabel_siang)
         try:
             pilihan = int(input("Silahkan Pilih (1/2/3/4) : "))
@@ -311,7 +351,7 @@ def menu_beli_makan_vip():
         tabel_malam.field_names = ["No","Makanan","Harga"]
         for makanan in menu_malam:
             tabel_malam.add_row(makanan)
-        tabel_pagi.add_row(["4", "Keluar", "-"])
+        tabel_malam.add_row(["4", "Keluar", "-"])
         print(tabel_malam)
         try:
             pilihan = int(input("Silahkan Pilih (1/2/3/4) : "))
@@ -341,7 +381,7 @@ def menu_beli_makan_vip():
         menu_VIP()
 
 def menu_user():
-    print (Fore.LIGHTMAGENTA_EX + f"\nHalo {username}, {waktu()}")
+    print (Fore.LIGHTMAGENTA_EX + f"\nHalo, {waktu()}")
     print (f"Gems Anda Sekarang adalah {gems}" + Style.RESET_ALL)
     print ("\n[1] Beli Makanan")
     print ("[2] Isi Gems")
@@ -363,11 +403,12 @@ def menu_user():
         menu_user()
 
 def menu_VIP():
-    print (Fore.LIGHTMAGENTA_EX + f"\nHalo {username_vip}, {waktu()}")
+    print (Fore.LIGHTMAGENTA_EX + f"\nHalo, {waktu()}")
     print (f"Gems Anda Sekarang adalah {gems}" + Style.RESET_ALL)
     print ("\n[1] Beli Makanan")
     print ("[2] Isi Gems")
-    print ("[3] Keluar")
+    print ("[3] Voucher")
+    print ("[4] Keluar")
     pilihan = int(input("Silahkan Pilih (1/2/3) : "))
 
     if pilihan == 1:
@@ -375,6 +416,8 @@ def menu_VIP():
     elif pilihan == 2:
         menu_isi_gems_VIP()
     elif pilihan == 3:
+        menu_voucher()
+    elif pilihan == 4:
         print(Fore.LIGHTBLUE_EX + "\nBaiklah!" + Style.RESET_ALL)
         menu_login()
     else:
